@@ -12,6 +12,7 @@ const passportConfig = require("./passport");
 dotenv.config();
 
 const pageRouter = require("./routes/page");
+const authRouter = require("./routes/auth");
 
 const app = express();
 passportConfig();
@@ -50,9 +51,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", pageRouter);
+app.use("/auth", authRouter);
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-  error.status(404);
+  error.status = 404;
   next(error);
 });
 app.use((err, req, res, next) => {
