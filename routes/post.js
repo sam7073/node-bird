@@ -15,7 +15,7 @@ try {
   fs.mkdirSync("uploads");
 }
 
-const uploads = multer({
+const upload = multer({
   storage: multer.diskStorage({
     destination(req, file, cb) {
       cb(null, "uploads/");
